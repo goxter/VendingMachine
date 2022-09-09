@@ -19,6 +19,9 @@ public class DataContext : IdentityDbContext<UserModel>
         _configuration = configuration;
     }
 
+    public DbSet<UserModel> Users { get; set; }
+    public DbSet<ProductModel> Products { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         if (!options.IsConfigured)     
@@ -31,6 +34,7 @@ public class DataContext : IdentityDbContext<UserModel>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
     }
 }
 
