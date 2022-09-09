@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwe123@
+      POSTGRES_DB: VendingMachine
+volumes:
+   db_data:
