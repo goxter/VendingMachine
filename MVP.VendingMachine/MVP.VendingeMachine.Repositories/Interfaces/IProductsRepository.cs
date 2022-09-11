@@ -16,6 +16,6 @@ public interface IProductsRepository
 
     bool AddProduct(ProductModel product);
 
-    bool UpdateProduct(ProductModel product, ClaimsPrincipal user);
+    bool UpdateProduct(ProductModel product);
 }
 

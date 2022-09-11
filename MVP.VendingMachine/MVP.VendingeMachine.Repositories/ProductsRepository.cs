@@ -38,9 +38,11 @@ public class ProductsRepository : IProductsRepository
     public ProductModel GetProductByName(string productName) =>
         _dataContext.Products.AsNoTracking().FirstOrDefault(product => product.ProductName == productName);
 
-    public bool UpdateProduct(ProductModel product, ClaimsPrincipal user)
+    public bool UpdateProduct(ProductModel product)
     {
-        throw new NotImplementedException();
+        _dataContext.Products.Update(product);
+
+        return SaveAll();
     }
 
     private bool SaveAll()

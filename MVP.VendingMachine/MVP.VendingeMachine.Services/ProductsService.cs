@@ -54,10 +54,16 @@ public class ProductsService : IProductsService
         var productToUpdate = _productsRepository.GetProduct(product.Id);
 
         if (productToUpdate is null)
-            return false;
+            throw new Exception("Product with specified id doesn't exists");
 
         if (productToUpdate.Seller.Id == _userManager.GetUserId(user))
-            return _productsRepository.UpdateProduct(productToUpdate, user);
+        {
+            productToUpdate.ProductName = product.Name;
+            productToUpdate.AmmountAvailable = product.AvailableAmount;
+            productToUpdate.Cost = product.Price;
+
+            return _productsRepository.UpdateProduct(productToUpdate);
+        }            
 
         return false;
     }
