@@ -9,6 +9,6 @@ namespace MVP.VendingMachine.DataModel.Models;
 
 public class UserModel : IdentityUser
 {
-    public int Deposit { get; set; }
+    public int Deposit { get; set; } = 0;
 }
 
