@@ -10,6 +10,8 @@ public interface IProductsRepository
 
     ProductModel GetProduct(Guid id);
 
+    ProductModel GetProductByName(string productName);
+
     bool DeleteProduct(ProductModel product);
 
     bool AddProduct(ProductModel product);

@@ -32,7 +32,7 @@ public class AccountsService : IAccountsService
             return null;
         
         var signingCredentials = GetSigningCredentials();
-        var claims = GetClaims(user);
+        var claims = await GetClaims(user);
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);        
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
@@ -55,12 +55,19 @@ public class AccountsService : IAccountsService
 
         return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
     }
-    private List<Claim> GetClaims(IdentityUser user)
+    private async Task<List<Claim>> GetClaims(UserModel user)
     {
         var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Name, user.Email)
-    };
+        {
+            new Claim(ClaimTypes.Name, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
+        };
+
+        var roles = await _userManager.GetRolesAsync(user);
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         return claims;
     }

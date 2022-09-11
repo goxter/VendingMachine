@@ -22,11 +22,13 @@ public class ProductsService : IProductsService
 
     public bool AddProduct(ProductDto product, ClaimsPrincipal user)
     {
-        if(_productsRepository.GetProduct(product.Id) is null)
-        {
-            return _productsRepository.AddProduct(product.ToModel());
-        }
-        
+        var existingProduct = _productsRepository.GetProductByName(product.Name);
+        var id = _userManager.GetUserId(user);
+
+        if (existingProduct is null)
+            return _productsRepository.AddProduct(product.ToModel(id));
+        else
+            throw new Exception("Product with same name already exists");
 
         return false;
     }

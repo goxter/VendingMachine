@@ -17,7 +17,9 @@ public class ProductsRepository : IProductsRepository
 
     public bool AddProduct(ProductModel product)
     {
-        throw new NotImplementedException();
+        _dataContext.Products.Add(product);
+
+        return SaveAll();
     }
 
     public bool DeleteProduct(ProductModel product)
@@ -30,10 +32,11 @@ public class ProductsRepository : IProductsRepository
     public IEnumerable<ProductModel> GetAllProducts() =>    
         _dataContext.Products.AsNoTracking();
 
-    public ProductModel GetProduct(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+    public ProductModel GetProduct(Guid id) =>
+        _dataContext.Products.Include(product => product.Seller).AsNoTracking().FirstOrDefault(product => product.Id == id);
+
+    public ProductModel GetProductByName(string productName) =>
+        _dataContext.Products.AsNoTracking().FirstOrDefault(product => product.ProductName == productName);
 
     public bool UpdateProduct(ProductModel product, ClaimsPrincipal user)
     {

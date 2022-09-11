@@ -33,6 +33,9 @@ public class ProductsController : ControllerBase
         if (product is null || !ModelState.IsValid)
             return BadRequest();
 
+        if (product.Price % 5 != 0)
+            return BadRequest("Price should be in multiples of 5");
+
         if (_productService.AddProduct(product, HttpContext.User))
             return StatusCode(201);
 
@@ -46,6 +49,9 @@ public class ProductsController : ControllerBase
         if (product is null || !ModelState.IsValid)
             return BadRequest();
 
+        if (product.Price % 5 != 0)
+            return BadRequest("Price should be in multiples of 5");
+
         if (_productService.UpdateProduct(product, HttpContext.User))
             return Ok();
 
@@ -54,11 +60,8 @@ public class ProductsController : ControllerBase
 
     [HttpDelete]
     [Authorize(Roles = "Seller")]
-    public IActionResult DeleteProduct(Guid id)
+    public IActionResult DeleteProduct([FromBody] Guid id)
     {
-        //if (id is null)
-        //    return BadRequest();
-
         if (_productService.DeleteProduct(id, HttpContext.User))
             return Ok();
 

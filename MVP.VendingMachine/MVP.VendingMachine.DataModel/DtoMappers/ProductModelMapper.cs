@@ -14,12 +14,12 @@ public static class ProductModelMapper
            Price = model.Cost
         };
 
-    public static ProductModel ToModel(this ProductDto model) =>
+    public static ProductModel ToModel(this ProductDto model, string sellerId) =>
         new()
         {
-            Id = model.Id,
             AmmountAvailable = model.AvailableAmount,
             ProductName = model.Name,
-            Cost = model.Price
+            Cost = model.Price,
+            SellerId = sellerId
         };
 }
