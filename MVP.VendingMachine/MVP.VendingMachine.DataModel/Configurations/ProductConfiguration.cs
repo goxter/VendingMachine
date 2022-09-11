@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MVP.VendingMachine.DataModel.Configurations;
 
-public class ProductConfiguration : IEntityTypeConfiguration<UserModel>
+public class ProductConfiguration : IEntityTypeConfiguration<ProductModel>
 {
-    public void Configure(EntityTypeBuilder<UserModel> builder)
+    public void Configure(EntityTypeBuilder<ProductModel> builder)
     {
         // Primary Key
         builder.HasKey(t => t.Id);

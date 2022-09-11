@@ -1,7 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using MVP.VendingeMachine.Repositories;
+using MVP.VendingeMachine.Repositories.Interfaces;
+using MVP.VendingeMachine.Services;
+using MVP.VendingeMachine.Services.Interfaces;
 using MVP.VendingMachine.DataModel;
 using MVP.VendingMachine.DataModel.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +18,34 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetSection("ConnectionString").Value);
 });
 
-// Dependencies
+
 builder.Services.AddIdentity<UserModel, IdentityRole>()
         .AddEntityFrameworkStores<DataContext>();
+
+var jwtSettings = builder.Configuration.GetSection("JWTSettings");
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["validIssuer"],
+        ValidAudience = jwtSettings["validAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["securityKey"]))
+    };
+});
+
+
+// Dependencies
+builder.Services.AddScoped<IAccountsService, AccountsService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 
 // Add services to the container.
 
