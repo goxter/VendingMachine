@@ -46,6 +46,8 @@ builder.Services.AddAuthentication(opt =>
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IBuyersService, BuyersService>();
 
 // Add services to the container.
 

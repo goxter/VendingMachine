@@ -12,5 +12,7 @@ public interface IProductsService
     bool UpdateProduct(ProductDto product, ClaimsPrincipal user);
 
     bool DeleteProduct(Guid id, ClaimsPrincipal user);
+
+    Task<bool> BuyProduct(ProductToBuyDto product, ClaimsPrincipal user);
 }
 

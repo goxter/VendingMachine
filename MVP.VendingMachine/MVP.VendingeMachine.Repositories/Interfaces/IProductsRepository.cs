@@ -17,5 +17,7 @@ public interface IProductsRepository
     bool AddProduct(ProductModel product);
 
     bool UpdateProduct(ProductModel product);
+
+    ProductModel GetProductForUpdate(Guid id);
 }
 

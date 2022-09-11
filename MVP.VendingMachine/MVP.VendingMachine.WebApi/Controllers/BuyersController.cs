@@ -22,8 +22,8 @@ public class BuyersController : Controller
     [Authorize(Roles = "Buyer")]
     public async Task<IActionResult> Deposit(int depositAmount)
     {
-        if (_validAmount.Contains(depositAmount))
-            BadRequest("You can deposit only 5, 10, 20, 50 and 100 cent coins.");
+        if (!_validAmount.Contains(depositAmount))
+            return BadRequest("You can deposit only 5, 10, 20, 50 and 100 cent coins.");
 
         await _buyerService.Deposit(depositAmount, HttpContext.User);
 

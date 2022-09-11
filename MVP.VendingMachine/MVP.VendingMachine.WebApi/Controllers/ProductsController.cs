@@ -68,5 +68,13 @@ public class ProductsController : ControllerBase
         return BadRequest();
     }
 
+    [HttpPost("buy")]
+    [Authorize(Roles = "Buyer")]
+    public async Task<IActionResult> BuyProducts([FromBody]  ProductToBuyDto product)
+    {
+        await _productService.BuyProduct(product, HttpContext.User);
+
+        return Ok();
+    }
 }
 

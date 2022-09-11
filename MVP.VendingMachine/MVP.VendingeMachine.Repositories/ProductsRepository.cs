@@ -35,6 +35,9 @@ public class ProductsRepository : IProductsRepository
     public ProductModel GetProduct(Guid id) =>
         _dataContext.Products.Include(product => product.Seller).AsNoTracking().FirstOrDefault(product => product.Id == id);
 
+    public ProductModel GetProductForUpdate(Guid id) =>
+        _dataContext.Products.Include(product => product.Seller).FirstOrDefault(product => product.Id == id);
+
     public ProductModel GetProductByName(string productName) =>
         _dataContext.Products.AsNoTracking().FirstOrDefault(product => product.ProductName == productName);
 
