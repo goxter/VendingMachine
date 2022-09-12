@@ -13,6 +13,12 @@ public class DataContext : IdentityDbContext<UserModel>
 
     public DataContext() : base() { }
 
+    public DataContext(DbContextOptions options)
+      : base(options)
+    {
+
+    }
+
     public DataContext(DbContextOptions options, IConfiguration configuration)
         : base(options)
     {

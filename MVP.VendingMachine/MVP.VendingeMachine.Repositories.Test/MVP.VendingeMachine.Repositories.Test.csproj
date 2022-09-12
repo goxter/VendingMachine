@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Moq" Version="4.18.2" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
@@ -18,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MVP.VendingeMachine.Services\MVP.VendingeMachine.Services.csproj" />
-    <ProjectReference Include="..\MVP.VendingMachine.WebApi\MVP.VendingMachine.WebApi.csproj" />
+    <ProjectReference Include="..\MVP.VendingeMachine.Repositories\MVP.VendingeMachine.Repositories.csproj" />
+    <ProjectReference Include="..\MVP.VendingMachine.DataModel\MVP.VendingMachine.DataModel.csproj" />
   </ItemGroup>
 
 </Project>

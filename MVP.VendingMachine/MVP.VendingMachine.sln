@@ -9,13 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingMachine.WebApi",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingMachine.DataModel", "MVP.VendingMachine.DataModel\MVP.VendingMachine.DataModel.csproj", "{9F4E6984-2DA4-4951-A0C7-C4E66858C426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingMachine.Dto", "MVP.VendingMachine.Dto\MVP.VendingMachine.Dto.csproj", "{384FEB5E-44D6-4490-8DEC-15FAAB55FC72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingMachine.Dto", "MVP.VendingMachine.Dto\MVP.VendingMachine.Dto.csproj", "{384FEB5E-44D6-4490-8DEC-15FAAB55FC72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingeMachine.Repositories", "MVP.VendingeMachine.Repositories\MVP.VendingeMachine.Repositories.csproj", "{6D456455-D5F2-4B14-B0EC-56AAE671ED16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingeMachine.Repositories", "MVP.VendingeMachine.Repositories\MVP.VendingeMachine.Repositories.csproj", "{6D456455-D5F2-4B14-B0EC-56AAE671ED16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingeMachine.Services", "MVP.VendingeMachine.Services\MVP.VendingeMachine.Services.csproj", "{AECB350D-2CC3-477F-A5CC-8F545CE716AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingeMachine.Services", "MVP.VendingeMachine.Services\MVP.VendingeMachine.Services.csproj", "{AECB350D-2CC3-477F-A5CC-8F545CE716AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingMachine.WebApi.Test", "MVP.VendingMachine.WebApi.Test\MVP.VendingMachine.WebApi.Test.csproj", "{3AA6B94E-DBCA-44F7-8030-11C2E1F1B96C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVP.VendingeMachine.Services.Test", "MVP.VendingeMachine.Services.Test\MVP.VendingeMachine.Services.Test.csproj", "{3A24EEF6-96C6-479A-BBC1-C253593CD34D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingMachine.WebApi.Test", "MVP.VendingMachine.WebApi.Test\MVP.VendingMachine.WebApi.Test.csproj", "{AF124A22-FCA4-4206-92C4-F7F9FC95BE97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.VendingeMachine.Repositories.Test", "MVP.VendingeMachine.Repositories.Test\MVP.VendingeMachine.Repositories.Test.csproj", "{C5955CB1-B2C3-41DA-9AD6-CFA17B21C8B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +51,18 @@ Global
 		{AECB350D-2CC3-477F-A5CC-8F545CE716AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AECB350D-2CC3-477F-A5CC-8F545CE716AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AECB350D-2CC3-477F-A5CC-8F545CE716AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3AA6B94E-DBCA-44F7-8030-11C2E1F1B96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3AA6B94E-DBCA-44F7-8030-11C2E1F1B96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3AA6B94E-DBCA-44F7-8030-11C2E1F1B96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3AA6B94E-DBCA-44F7-8030-11C2E1F1B96C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A24EEF6-96C6-479A-BBC1-C253593CD34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A24EEF6-96C6-479A-BBC1-C253593CD34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A24EEF6-96C6-479A-BBC1-C253593CD34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A24EEF6-96C6-479A-BBC1-C253593CD34D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF124A22-FCA4-4206-92C4-F7F9FC95BE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF124A22-FCA4-4206-92C4-F7F9FC95BE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF124A22-FCA4-4206-92C4-F7F9FC95BE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF124A22-FCA4-4206-92C4-F7F9FC95BE97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5955CB1-B2C3-41DA-9AD6-CFA17B21C8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5955CB1-B2C3-41DA-9AD6-CFA17B21C8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5955CB1-B2C3-41DA-9AD6-CFA17B21C8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5955CB1-B2C3-41DA-9AD6-CFA17B21C8B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
