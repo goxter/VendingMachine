@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "6b0749b6-a71c-4467-9dca-42aacaa8ca62",
+		"name": "MVP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3985969"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"P@ssw0rd1234!\",\r\n  \"confirmPassword\": \"P@ssw0rd1234!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7227/api/accounts/registration",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"accounts",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"P@ssw0rd1234!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7227/api/accounts/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7227/api/products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"availableAmount\": 5,\r\n  \"name\": \"Mars\",\r\n  \"price\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:48319/api/products",
+					"host": [
+						"localhost"
+					],
+					"port": "48319",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuyProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"availableAmount\": 5,\r\n  \"name\": \"Mars\",\r\n  \"price\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:48319/api/products",
+					"host": [
+						"localhost"
+					],
+					"port": "48319",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdEBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjFjMGFiMDIzLWViNDEtNGNkNC04MTRkLWY4ODdiYzI2MjQ2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJTZWxsZXIiLCJCdXllciJdLCJleHAiOjE2NjI5MDk2MzYsImlzcyI6Ik1WUC5WZW5kaW5nTWFjaGluZS5BUEkiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDExIn0.dzyZE39wnKLvk6f7fbbr1POuPIYcB5_Aw40Nzs22gE4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7227/api/buyer/deposit?depositAmount=3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"buyer",
+						"deposit"
+					],
+					"query": [
+						{
+							"key": "depositAmount",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetDeposit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdEBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjFjMGFiMDIzLWViNDEtNGNkNC04MTRkLWY4ODdiYzI2MjQ2MSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJTZWxsZXIiLCJCdXllciJdLCJleHAiOjE2NjI5MDk2MzYsImlzcyI6Ik1WUC5WZW5kaW5nTWFjaGluZS5BUEkiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDExIn0.dzyZE39wnKLvk6f7fbbr1POuPIYcB5_Aw40Nzs22gE4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7227/api/buyer/reset",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"buyer",
+						"reset"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProduct",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"availableAmount\": 5,\r\n  \"name\": \"Mars\",\r\n  \"price\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:48319/api/products",
+					"host": [
+						"localhost"
+					],
+					"port": "48319",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"9ea7d08e-0dae-49b6-9625-3a8b545d2206\"\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7227/api/products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7227",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

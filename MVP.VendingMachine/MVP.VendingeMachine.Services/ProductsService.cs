@@ -5,8 +5,6 @@ using MVP.VendingMachine.DataModel;
 using MVP.VendingMachine.DataModel.DtoMappers;
 using MVP.VendingMachine.DataModel.Models;
 using MVP.VendingMachine.Dto;
-using System.Net.Http;
-using System.Reflection.Metadata;
 using System.Security.Claims;
 
 namespace MVP.VendingeMachine.Services;
@@ -26,35 +24,39 @@ public class ProductsService : IProductsService
         _dataContext = dataContext;
     }
 
-    public bool AddProduct(ProductDto product, ClaimsPrincipal user)
+    public ResponseDto AddProduct(ProductDto product, ClaimsPrincipal user)
     {
         var existingProduct = _productsRepository.GetProductByName(product.Name);
         var id = _userManager.GetUserId(user);
-
+        var result = new ResponseDto();
         if (existingProduct is null)
-            return _productsRepository.AddProduct(product.ToModel(id));
+            result.IsSuccess = _productsRepository.AddProduct(product.ToModel(id));
         else
-            throw new Exception("Product with same name already exists.");
+        {
+            result.IsSuccess = false;
+            result.Message = "Product with same name already exists.";
+        }
 
-        return false;
+        return result;
     }
 
-    public async Task<bool> BuyProduct(ProductToBuyDto product, ClaimsPrincipal user)
+    public async Task<ResponseDto> BuyProduct(ProductToBuyDto product, ClaimsPrincipal user)
     {
         var existingProduct = _productsRepository.GetProductForUpdate(product.Id);
-        if(existingProduct is null)
-            throw new Exception("Product doesn't exist.");
+        if (existingProduct is null)
+            return new ResponseDto { IsSuccess = false, Message = "Product doesn't exist." };
 
         if(existingProduct.AmmountAvailable < product.Amount)
-            throw new Exception("The desired amount of the product is unavailable.");
+            return new ResponseDto { IsSuccess = false, Message = "The desired amount of the product is unavailable." };
 
         var buyer = await _userManager.GetUserAsync(user);
 
         if(buyer.Deposit < existingProduct.Cost*product.Amount)
-            throw new Exception("Insufficient funds.");
+            return new ResponseDto { IsSuccess = false, Message = "Insufficient funds." };
 
         using var transaction = _dataContext.Database.BeginTransaction();
 
+        var result = new ResponseDto();
         try
         {
             existingProduct.AmmountAvailable -= product.Amount;
@@ -65,39 +67,46 @@ public class ProductsService : IProductsService
 
             transaction.Commit();
 
-            return true;
+            result.IsSuccess = true;
         }
         catch (Exception ex)
         {
             transaction.Rollback();
-            throw ex;
+            result.IsSuccess = false;
+            result.Message = "Something went wrong. Please contact system administrator.";
+            //log exception throw ex;
         }
 
-        return false;
+        return result;
     }
 
-    public bool DeleteProduct(Guid id, ClaimsPrincipal user)
+    public ResponseDto DeleteProduct(Guid id, ClaimsPrincipal user)
     {
         var product = _productsRepository.GetProduct(id);
-        
-        if (product.Seller.Id == _userManager.GetUserId(user))
-            return _productsRepository.DeleteProduct(product);
 
-        return false;
+        var result = new ResponseDto { IsSuccess = false};
+        if (product.Seller.Id == _userManager.GetUserId(user))
+            result.IsSuccess = _productsRepository.DeleteProduct(product);
+
+        return result;
     }
 
     public ProductDto[] GetProducts() =>    
         _productsRepository.GetAllProducts().Select(p => p.ToDto()).ToArray();
 
-    public bool UpdateProduct(ProductDto product, ClaimsPrincipal user)
+    public ResponseDto UpdateProduct(ProductDto product, ClaimsPrincipal user)
     {
+        var result = new ResponseDto { IsSuccess = false };
         if (product is null)
-            return false;
+            return result;
 
         var productToUpdate = _productsRepository.GetProduct(product.Id);
 
         if (productToUpdate is null)
-            throw new Exception("Product with specified id doesn't exists");
+        {
+            result.Message = "Product with specified id doesn't exists";
+            return result;
+        }
 
         if (productToUpdate.Seller.Id == _userManager.GetUserId(user))
         {
@@ -105,10 +114,10 @@ public class ProductsService : IProductsService
             productToUpdate.AmmountAvailable = product.AvailableAmount;
             productToUpdate.Cost = product.Price;
 
-            return _productsRepository.UpdateProduct(productToUpdate);
+            result.IsSuccess = _productsRepository.UpdateProduct(productToUpdate);
         }            
 
-        return false;
+        return result;
     }
 }
 

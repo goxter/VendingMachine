@@ -7,12 +7,12 @@ public interface IProductsService
 {
     ProductDto[] GetProducts();
 
-    bool AddProduct(ProductDto product, ClaimsPrincipal user);
+    ResponseDto AddProduct(ProductDto product, ClaimsPrincipal user);
 
-    bool UpdateProduct(ProductDto product, ClaimsPrincipal user);
+    ResponseDto UpdateProduct(ProductDto product, ClaimsPrincipal user);
 
-    bool DeleteProduct(Guid id, ClaimsPrincipal user);
+    ResponseDto DeleteProduct(Guid id, ClaimsPrincipal user);
 
-    Task<bool> BuyProduct(ProductToBuyDto product, ClaimsPrincipal user);
+    Task<ResponseDto> BuyProduct(ProductToBuyDto product, ClaimsPrincipal user);
 }
 

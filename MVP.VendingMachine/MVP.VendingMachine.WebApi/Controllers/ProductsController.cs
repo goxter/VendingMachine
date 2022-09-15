@@ -2,12 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MVP.VendingeMachine.Repositories;
-using MVP.VendingeMachine.Services;
 using MVP.VendingeMachine.Services.Interfaces;
-using MVP.VendingMachine.DataModel.Models;
 using MVP.VendingMachine.Dto;
-using System.Data;
 
 namespace MVP.VendingMachine.WebApi.Controllers;
 
@@ -36,10 +32,11 @@ public class ProductsController : ControllerBase
         if (product.Price % 5 != 0)
             return BadRequest("Price should be in multiples of 5");
 
-        if (_productService.AddProduct(product, HttpContext.User))
+        var result = _productService.AddProduct(product, HttpContext.User);
+        if (result.IsSuccess)
             return StatusCode(201);
 
-        return BadRequest();
+        return BadRequest(result.Message);
     }        
 
     [HttpPut]
@@ -52,20 +49,22 @@ public class ProductsController : ControllerBase
         if (product.Price % 5 != 0)
             return BadRequest("Price should be in multiples of 5");
 
-        if (_productService.UpdateProduct(product, HttpContext.User))
+        var result = _productService.UpdateProduct(product, HttpContext.User);
+        if (result.IsSuccess)
             return Ok();
 
-        return BadRequest();
+        return BadRequest(result.Message);
     }
 
     [HttpDelete]
     [Authorize(Roles = "Seller")]
     public IActionResult DeleteProduct([FromBody] Guid id)
     {
-        if (_productService.DeleteProduct(id, HttpContext.User))
+        var result = _productService.DeleteProduct(id, HttpContext.User);
+        if (result.IsSuccess)
             return Ok();
 
-        return BadRequest();
+        return BadRequest(result.Message);
     }
 
     [HttpPost("buy")]
