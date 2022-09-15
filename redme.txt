@@ -1,0 +1,6 @@
+To run solution you first need to run docker-compose build and docker-compose up commands in order to setup database.
+Docker for desktop is necessary for this operations.
+
+After this step open the solution in Visual studio.
+Select MVP.VendingMachine.WebApi as startup project.
+Run the solution.
