@@ -50,12 +50,16 @@ public class ProductsControlerTest
             HttpContext = new DefaultHttpContext() { User = _claimsFaker.Generate() }
         };
 
+
         _productsService.Setup(x => x.BuyProduct(It.IsAny<ProductToBuyDto>(), It.IsAny<ClaimsPrincipal>()))
-            .Returns(Task.FromResult(true));
+            .Returns(Task.FromResult(new ResponseDto
+            {
+                IsSuccess = true
+            }));
 
         var response = _productsController.BuyProducts(new ProductToBuyDto()).Result;
  
-        Assert.IsInstanceOfType(response, typeof(Microsoft.AspNetCore.Mvc.OkResult));
+        Assert.IsInstanceOfType(response, typeof(OkObjectResult));
     }
 
     [TestMethod]
@@ -67,7 +71,10 @@ public class ProductsControlerTest
         };
 
         _productsService.Setup(x => x.DeleteProduct(It.IsAny<Guid>(), It.IsAny<ClaimsPrincipal>()))
-            .Returns(true);
+            .Returns(new ResponseDto
+            {
+                IsSuccess = true
+            });
 
         var response = _productsController.DeleteProduct(new Guid());
 
@@ -83,11 +90,14 @@ public class ProductsControlerTest
         };
 
         _productsService.Setup(x => x.DeleteProduct(It.IsAny<Guid>(), It.IsAny<ClaimsPrincipal>()))
-            .Returns(false);
+            .Returns(new ResponseDto
+            {
+                IsSuccess = false
+            });
 
         var response = _productsController.DeleteProduct(new Guid());
 
-        Assert.IsInstanceOfType(response, typeof(BadRequestResult));
+        Assert.IsInstanceOfType(response, typeof(BadRequestObjectResult));
     }
 }
 

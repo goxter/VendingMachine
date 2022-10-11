@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MVP.VendingeMachine.Repositories.Interfaces;
+using MVP.VendingeMachine.Services.Helpers;
 using MVP.VendingeMachine.Services.Interfaces;
 using MVP.VendingMachine.DataModel;
 using MVP.VendingMachine.DataModel.DtoMappers;
 using MVP.VendingMachine.DataModel.Models;
 using MVP.VendingMachine.Dto;
+using System;
 using System.Security.Claims;
 
 namespace MVP.VendingeMachine.Services;
@@ -62,11 +64,14 @@ public class ProductsService : IProductsService
             existingProduct.AmmountAvailable -= product.Amount;
             _productsRepository.UpdateProduct(existingProduct);
 
-            buyer.Deposit -= product.Amount*existingProduct.Cost;
+            var finalPrice = product.Amount * existingProduct.Cost;
+            buyer.Deposit -= finalPrice;
             _usersRepository.UpdateUser(buyer);
 
             transaction.Commit();
 
+            var change = CoinChangeHelper.GetChange(buyer.Deposit);
+            result.Message = $"You bought {existingProduct.ProductName} for {finalPrice}. Here is your change: {string.Join(", ", change)}";
             result.IsSuccess = true;
         }
         catch (Exception ex)
